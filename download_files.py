@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-def download_files(config_file):
+def download_files(config_file, file_dir):
     with open(config_file, 'r') as file:
         lines = file.readlines()
 
@@ -13,13 +13,11 @@ def download_files(config_file):
 
         line = line.split(maxsplit=1)
         url = line[0]
-        file_dir = line[1]
-        filename = None if len(line) <= 2 else line[2]
+        filename = None if len(line) <= 1 else line[1]
 
-        extensions = {'c': '.safetensors'}
-        directories = {'c': 'checkpoints'}
+        extensions = {'checkpoints': '.safetensors'}
         path = '/workspace/ComfyUI/models/'
-        absolute_path = file_dir + directories[file_dir]
+        absolute_path = path + file_dir + '/'
         if filename:
             absolute_path += filename + extensions[file_dir]
             command = f'wget -c {url} -O {absolute_path}'
@@ -30,5 +28,8 @@ def download_files(config_file):
 
 
 if __name__ == "__main__":
-    config_file = 'download_config.txt'
-    download_files(config_file)
+    config_dir = 'models'
+    for config_file in os.listdir(config_dir):
+        if config_file.endswith('.txt'):
+            config_path = os.path.join(config_dir, config_file)
+            download_files(config_path, config_file[0:-4])
