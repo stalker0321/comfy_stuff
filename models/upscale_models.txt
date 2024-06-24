@@ -1,0 +1,1 @@
+https://huggingface.co/vodkolyan/blue_hair/resolve/main/remacri_original.pt
