@@ -15,7 +15,8 @@ def download_files(config_file, file_dir):
         url = line[0]
         filename = None if len(line) <= 1 else line[1]
 
-        extensions = {'checkpoints': '.safetensors'}
+        extensions = {'checkpoints': '.safetensors',
+                      'loras': '.safetensors'}
         path = '/workspace/ComfyUI/models/'
         absolute_path = path + file_dir + '/'
         if filename:
