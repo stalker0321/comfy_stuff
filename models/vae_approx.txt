@@ -1,0 +1,1 @@
+https://github.com/madebyollin/taesd/raw/main/taesdxl_decoder.pth
